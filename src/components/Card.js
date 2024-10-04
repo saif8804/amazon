@@ -1,7 +1,7 @@
 import React from "react";
 
-const Card = ({ img, heading }) => {
-
+const Card = ({img, heading}) => {
+   
   return (
     <div
      className="w-[300px] h-[360px] bg-white p-3">

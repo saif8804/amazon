@@ -8,7 +8,7 @@ const Body = () => {
     <div>
         <Header />
          <Hero />
-        <CardSection /> 
+        <CardSection />
     </div>
   )
 }
