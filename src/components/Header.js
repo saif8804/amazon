@@ -2,11 +2,14 @@ import React from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { FaSearch } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+
+  const cartItems = useSelector((store) => store.cart.items);
   return (
     <div>
-      <div className="w-screen h-[80px] bg-black flex items-center gap-6">
+      <div className="w-screen h-[80px] bg-black flex items-center gap-6 fixed z-10 ">
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8wsd5NzkiO8oerpgoQZMXnflSLwuplVVZfVIain0LrsNqEXf4cUsyGp7WZebQ2p3e60&usqp=CAU"
           alt="amazon-logo"
@@ -33,8 +36,9 @@ const Header = () => {
             Account & Lists
            </p>
           <p className="text-white leading-4">return & <br/> Orders </p>
-          <div className="text-white ">
-            <TiShoppingCart className="w-[50px] h-[200px]" />
+          <div className="text-white flex items-center">
+            <TiShoppingCart className="h-[50px] w-[50px]  text-white" /> 
+            <p className="text-white">({cartItems.length} items)</p>
           </div>
       </div>
     </div>  

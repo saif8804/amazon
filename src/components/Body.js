@@ -4,6 +4,7 @@ import Hero from './Hero'
 import CardSection from './CardSection'
 
 const Body = () => {
+
   return (
     <div>
         <Header />
