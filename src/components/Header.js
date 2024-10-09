@@ -3,6 +3,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaSearch } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
@@ -37,7 +38,7 @@ const Header = () => {
            </p>
           <p className="text-white leading-4">return & <br/> Orders </p>
           <div className="text-white flex items-center">
-            <TiShoppingCart className="h-[50px] w-[50px]  text-white" /> 
+           <Link to="/cart"> <TiShoppingCart className="h-[50px] w-[50px]  text-white" /></Link> 
             <p className="text-white">({cartItems.length} items)</p>
           </div>
       </div>
@@ -45,3 +46,4 @@ const Header = () => {
   ); 
 };
 export default Header;
+

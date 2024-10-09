@@ -4,8 +4,7 @@ const Images = [
     image: "../assets/laptop.jpg",
     name: "Deal based on Your Shopping Trends",
     price: "11,999",
-    description:
-      "Redmi Pad Pro| Snapdragon 7s Gen 2| 30.7cm  (12.1)+ Tablet| 33+ Days Standby|10000mAh| HyperOS| 120Hz|6GB, 128GB| Quad Speakers|Wi-Fi 6| Mist Blue",
+    description: "Redmi Pad Pro| Snapdragon 7s Gen 2| 30.7cm  (12.1)+ Tablet| 33+ Days Standby|10000mAh| HyperOS| 120Hz|6GB, 128GB| Quad Speakers|Wi-Fi 6| Mist Blue",
     stars: 3.4,
   },    
   {
