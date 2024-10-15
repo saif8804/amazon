@@ -5,6 +5,7 @@ import CardPage from "./components/CardPage";
 import { Provider } from "react-redux";
 import appStore from "./utils/store";
 import Cart from "./components/Cart";
+import CheckOut from "./components/CheckOut";
 
 function App() {
   return (
@@ -14,7 +15,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Body />} />
           <Route path="/card-page" element={<CardPage />} />
-          <Route  path="/cart" element={<Cart/>}/>
+          <Route  path="/cart" element={<Cart/>}/>  
+          <Route  path="/check-out" element={<CheckOut/>}/>  
+
+
         </Routes>
       </Router>
     </div>

@@ -5,13 +5,15 @@ import {
   clearCart,
   decrement,
   increment,
-  removeItem,  
+  removeItem,
 } from "../utils/cartSlice";
 import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const cartItems = useSelector((store) => store.cart.items);
+  const navigate = useNavigate();
+  const cartItems = useSelector((store) => store?.cart?.items);
   const dispatch = useDispatch();
 
   const increaseCount = (id) => {
@@ -22,7 +24,13 @@ const Cart = () => {
     dispatch(decrement(id));
   };
 
+  const totalQuantity = cartItems.reduce((total, item) => {
+      return total + item.quantity
+  },0) 
 
+   const totalPrice = cartItems.reduce((total, item) => {
+     return total + item.unitPrice * item.quantity;
+ }, 0);
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -49,7 +57,7 @@ const Cart = () => {
       <div>
         {cartItems.map((items) => {
           return (
-            <div className="flex gap-8 mt-12">
+            <div className="flex gap-4 mt-12" key={items.id}>
               <div className="products flex gap-2 ml-12 p-4 bg-white rounded-xl  shadow-md w-9/12">
                 <img
                   className="w-[300px] h-[300px]"
@@ -61,7 +69,7 @@ const Cart = () => {
                     {items.description}
                   </p>
                   <Stars stars={items.stars} />
-                  <p className="font-bold pt-2"> Rs-{ items.price}</p>
+                  <p className="font-bold pt-2"> Rs-{items.price}</p>
                   <div className="flex items-center gap-2 mt-2">
                     <CiSquarePlus onClick={() => increaseCount(items.id)} />
                     <input
@@ -79,9 +87,20 @@ const Cart = () => {
                   </button>
                 </div>
               </div>
-              <div>
-                <h1 className="font-bold">Hello</h1>
-              </div>
+              <div className="bg-white rounded shadow-md w-[300px]">
+                {cartItems.length > 0 && (
+                  <div className="mt-4">
+                    <h2 className="text-xl font-bold" >
+                       subtotal:({totalQuantity}): Rs-{totalPrice}
+                    </h2>
+                    <button 
+                     onClick={() => {
+                         navigate("/check-out")
+                     }}
+                    className="mt-2 bg-orange-400 px-12 rounded-md">Proceed to Buy</button>
+                  </div>
+                )}
+              </div> 
             </div>
           );
         })}
