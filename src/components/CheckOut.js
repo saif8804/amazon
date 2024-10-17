@@ -1,6 +1,7 @@
 import React from "react";
 import { FcPrivacy } from "react-icons/fc";
 import DeliveryPage from "./DeliveryPage";
+import OrderSummary from "./OrderSummary";
 
 const checkOut = () => {
   return (
@@ -14,8 +15,10 @@ const checkOut = () => {
         <h2 className="text-2xl font-bold">Checkout</h2>
         <FcPrivacy className=" w-12 h-12 " />
       </div>
-      <div className="my-4 mx-52">
+      <div className=" flex justify-around  mt-8">
         <DeliveryPage />
+        <OrderSummary />
+
       </div>
     </div>
   );

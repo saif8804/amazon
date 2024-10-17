@@ -10,15 +10,13 @@ import CheckOut from "./components/CheckOut";
 function App() {
   return (
     <Provider store={appStore}>
-    <div className="App">
+    <div className="App" >
       <Router>
         <Routes>
           <Route path="/" element={<Body />} />
           <Route path="/card-page" element={<CardPage />} />
           <Route  path="/cart" element={<Cart/>}/>  
           <Route  path="/check-out" element={<CheckOut/>}/>  
-
-
         </Routes>
       </Router>
     </div>
