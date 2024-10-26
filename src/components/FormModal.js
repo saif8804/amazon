@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 
-const FormModal = ({ closeModal }) => {
+const FormModal = ({ closeModal }  ) => {
+  const [user, setUser] = useState({
+    fullname: "",
+    email: "",
+    pincode: "",
+    appartment: "",
+    area: "",
+    landmark: "",
+    city: "",
+    state: "",
+  });
+
+
+  const handleSubmitForm = (e) => {
+        e.preventDefault();
+       console.log(user);
+       closeModal();
+
+  }
+  let name, value;
+  const handleInputs = (e) => {
+    console.log(e);
+    name = e.target.name;
+    value = e.target.value;
+    setUser({ ...user, [name]: value });
+  };
+
   return (
     <>
       <div
@@ -8,7 +34,8 @@ const FormModal = ({ closeModal }) => {
         onClick={closeModal}
       ></div>
       <div className="">
-        <div className=" absolute top-[50%] left-[50%]">
+        <div className=" absolute top-[50%] left-[50%]"
+        >
           <form
             className="w-[500px] h-[700px] bg-white border border-black -translate-x-[50%] -translate-y-[35%]  rounded"
             // onClick={(e) => e.preventDefault()}
@@ -20,37 +47,31 @@ const FormModal = ({ closeModal }) => {
             </div>
             <p className="p-2 font-bold text-xl">Add a new address</p>
             <div className="m-4">
-              <h2 className="font-bold">Country/Region</h2>
-              <select
-                id="country"
-                name="country"
-                className="w-full border-4 border-green-800 rounded-md "
-              >
-                <option value="India">India</option>
-                <option value="Pakitan">Pakistan</option>
-                <option value="China">China</option>
-                <option value="bangladesh">Bangladesh</option>
-                <option value="Afghanistan">Afghanistan</option>
-                <option value="Newzealand">Newzealand</option>
-                <option value="Australia">Australia</option>
-                <option value="Africa">Africa</option>
-                <option value="Korea">Korea</option>
-              </select>
+             
               <h2 className="font-bold pt-2">
                 Full name (First and Last Name)
               </h2>
               <input
                 type="text"
+                name="fullname"
+                value={user.fullname}
+                onChange={handleInputs}
                 className="w-full border-4 border-green-800 rounded-md "
               />
-              <h2 className="font-bold pt-2">Mobile Number</h2>
+              <h2 className="font-bold pt-2">Email</h2>
               <input
                 type="text"
+                name="email"
+                value={user.email}
+                onChange={handleInputs}
                 className="w-full border-4 border-green-800 rounded-md "
               />
               <h2 className="font-bold pt-2">Pincode</h2>
               <input
                 type="text"
+                name="pincode"
+                value={user.pincode}
+                onChange={handleInputs}
                 placeholder="6-digits[0-9] PIN CODE"
                 className="w-full border-4 border-green-800 rounded-md px-2 "
               />
@@ -59,16 +80,25 @@ const FormModal = ({ closeModal }) => {
               </h2>
               <input
                 type="text"
+                name="appartment"
+                value={user.appartment}
+                onChange={handleInputs}
                 className="w-full border-4 border-green-800 rounded-md px-2 "
               />
               <h2 className="font-bold pt-2">Area, Street, Sector, Village</h2>
               <input
                 type="text"
+                name="area"
+                value={user.area}
+                onChange={handleInputs}
                 className="w-full border-4 border-green-800 rounded-md "
               />
               <h2 className="font-bold pt-2">Landmark</h2>
               <input
                 type="text"
+                name="landmark"
+                value={user.landmark}
+                onChange={handleInputs}
                 className="w-full border-4 border-green-800 rounded-md "
               />
               <div className="pt-2 flex justify-between">
@@ -76,6 +106,9 @@ const FormModal = ({ closeModal }) => {
                   <h2 className="font-bold">Town/City</h2>
                   <input
                     type="text"
+                    name="city"
+                    value={user.city}
+                    onChange={handleInputs}
                     className="w-full border-4 border-green-800 rounded-md "
                   />
                 </div>
@@ -83,6 +116,9 @@ const FormModal = ({ closeModal }) => {
                   <h2 className="font-bold">State</h2>
                   <input
                     type="text"
+                    name="state"
+                    value={user.state}
+                    onChange={handleInputs}
                     className="w-full border-4 border-green-800 rounded-md "
                   />
                 </div>
@@ -91,10 +127,8 @@ const FormModal = ({ closeModal }) => {
                 <input type="checkbox" />
                 <p>Make this my default address</p>
               </div>
-
-              <button
-                className="mt-2 bg-orange-500 py-2 px-4 rounded-md"
-                onClick={closeModal}
+              <button className="mt-2 bg-orange-500 py-2 px-4 rounded-md"
+              onClick={handleSubmitForm}
               >
                 Use this address
               </button>

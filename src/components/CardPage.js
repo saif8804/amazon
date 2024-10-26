@@ -32,7 +32,6 @@ const CardPage = () => {
         <p className="w-2/4 text-xl font-bold">{product.description}</p>
         <Stars stars={product.stars} />
         <p className="font-bold pt-2"> Rs-{product.price}</p>
-       
         <button className="bg-orange-400 py-1 px-2 mt-2 rounded"
          onClick={() => handleAddItem(product)}
         >

@@ -4,10 +4,12 @@ import FormModal from "./FormModal";
 
 const DeliveryPage = () => {
     
+
   const [isFormOpen, setIsFormOpen] = useState(false);
    const handleFormState = () => {
      setIsFormOpen(!isFormOpen);
   };
+
 
  const closeModal = () =>{
      setIsFormOpen(false);
@@ -15,7 +17,7 @@ const DeliveryPage = () => {
 
   return (
     <div className="relative"> 
-       {isFormOpen && <FormModal closeModal={closeModal} />} 
+       {isFormOpen && <FormModal  closeModal={closeModal} />} 
       <div>
         <h1 className="text-2xl text-orange-600 font-bold">
           1 Select a delivery address
@@ -24,7 +26,8 @@ const DeliveryPage = () => {
           <h2 className="text-xl font-bold">Your address</h2>
           <div className="w-[680px] h-[1px] bg-gray-200"></div>
           <div className="flex flex-col justify-between w-full h-[340px]" >
-           <div className="mt-2 flex items-center">
+           <div className="mt-2 flex flex-col items-start">
+           <div className="flex items-center gap-1">
            <FaPlus />
             <p
               className=" hover:text-orange-400 hover:underline cursor-pointer"
@@ -33,6 +36,11 @@ const DeliveryPage = () => {
               {" "} 
               Add a new address
             </p>
+           </div>
+            <div className="w-[680px] h-[100px] bg-red-500 p-1">
+              
+                
+            </div>
            </div>
             <span
                 className=" w-3/12  px-4 bg-orange-500 rounded-md cursor-pointer "
