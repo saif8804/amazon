@@ -18,7 +18,6 @@ const checkOut = () => {
       <div className=" flex justify-around  mt-8">
         <DeliveryPage />
         <OrderSummary />
-
       </div>
     </div>
   );
