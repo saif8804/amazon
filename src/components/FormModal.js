@@ -1,9 +1,10 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const UserContext = createContext();
-
-const FormModal = ({ closeModal }) => {
+const FormModal = ({ closeModal, addressToEdit, saveAddress }) => {
   const [user, setUser] = useState({
+    id:"",
     fullname: "",
     email: "",
     pincode: "",
@@ -14,10 +15,13 @@ const FormModal = ({ closeModal }) => {
     state: "",
   });
 
-  const [addresses, setAddresses] = useState(() => {
-    const savedAddresses = localStorage.getItem("addresses");
-    return savedAddresses ? JSON.parse(savedAddresses) : [];
-  });
+  useEffect(() => {
+    if (addressToEdit) {
+      setUser(addressToEdit);
+    }else{
+      setUser((prev)=>({...prev, id: uuidv4()}))
+    }
+  }, [addressToEdit]);
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -25,13 +29,10 @@ const FormModal = ({ closeModal }) => {
       alert("Please fill in all required fields.");
       return;
     }
-
-    const newAddresses = [...addresses, user];
-    setAddresses(newAddresses);
-    localStorage.setItem("addresses", JSON.stringify(newAddresses));
+    saveAddress(user);
     closeModal();
-
     setUser({
+      id:uuidv4(),
       fullname: "",
       email: "",
       pincode: "",
@@ -47,7 +48,6 @@ const FormModal = ({ closeModal }) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
-
 
   return (
     <UserContext.Provider value={user}>
@@ -136,15 +136,14 @@ const FormModal = ({ closeModal }) => {
                 <p>Make this my default address</p>
               </div>
               <button
-                type="submit"
-                className="mt-4 bg-orange-500 py-2 px-4 rounded-md"
-              >
-                Use this address
-              </button>
+              type="submit"
+              className="mt-4 bg-orange-500 py-2 px-4 rounded-md"
+            >
+              {addressToEdit ? "Update address" : "Use this address"}
+            </button>
             </div>
           </form>
         </div>
-     
       </>
     </UserContext.Provider>
   );

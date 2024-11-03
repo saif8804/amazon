@@ -1,4 +1,3 @@
-// DeliveryPage.js
 import React, { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa6";
 import FormModal from "./FormModal";
@@ -6,9 +5,29 @@ import FormModal from "./FormModal";
 const DeliveryPage = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [savedAddresses, setSavedAddresses] = useState([]);
+  const [addressToEdit, setAddressToEdit] = useState(null);
 
   const handleFormState = () => {
+    setAddressToEdit(null);
     setIsFormOpen(!isFormOpen);
+  };
+
+  const handleEdit = (address) => {
+    setAddressToEdit(address);
+    setIsFormOpen(true);
+  };
+
+  const saveAddress = (updatedAddress) => {
+    let updatedAddresses;
+    if (addressToEdit) {
+      updatedAddresses = savedAddresses.map((addr) =>
+        addr.email === addressToEdit.email ? updatedAddress : addr
+      ); 
+    } else {
+      updatedAddresses = [...savedAddresses, updatedAddress];
+    }
+    setSavedAddresses(updatedAddresses);
+    localStorage.setItem("addresses", JSON.stringify(updatedAddresses));
   };
 
   const closeModal = () => {
@@ -27,7 +46,13 @@ const DeliveryPage = () => {
 
   return (
     <div className="relative">
-      {isFormOpen && <FormModal closeModal={closeModal} />}
+      {isFormOpen && (
+        <FormModal
+          closeModal={closeModal}
+          addressToEdit={addressToEdit}
+          saveAddress={saveAddress}
+        />
+      )}
       <div>
         <h1 className="text-2xl text-orange-600 font-bold">
           1. Select a delivery address
@@ -45,20 +70,32 @@ const DeliveryPage = () => {
                 Add a new address
               </p>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 w-[680px] ">
               {savedAddresses.length > 0 ? (
                 savedAddresses.map((addr, index) => (
-                  <div key={index} className="border-2 border-black p-2 mb-2">
-                    <div className="font-bold">{addr.fullname}</div>
-                    <div>{addr.appartment}, {addr.area}</div>
-                    <div>{addr.city}, {addr.state}, {addr.pincode}</div>
-                    <div>{addr.landmark}</div>
+                  <div key={index} className="border-2 border-orange-400 p-2 mb-2 h-[80px]">
+                    <div className="flex flex-col justify-between">
+                      <div className="font-bold">
+                        {addr.fullname}, {addr.appartment}, {addr.area}, {addr.city}, {addr.state}, {addr.pincode}, {addr.landmark}
+                      </div>
+                      <div className="cursor-pointer">
+                        <p onClick={() => handleEdit(addr)}>Edit address</p>
+                      </div>
+                    </div>
                   </div>
                 ))
               ) : (
                 <p>No addresses saved yet.</p>
               )}
             </div>
+          </div>
+          <div className="mt-12">
+            <button
+              type="submit"
+              className="mt-4 bg-orange-500 py-2 px-4 rounded-md"
+            >
+              Use this address
+            </button>
           </div>
         </div>
       </div>
