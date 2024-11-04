@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa6";
 import FormModal from "./FormModal";
+import { useNavigate } from "react-router-dom";
+
 
 const DeliveryPage = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [addressToEdit, setAddressToEdit] = useState(null);
+  const navigate = useNavigate();
 
   const handleFormState = () => {
     setAddressToEdit(null);
@@ -93,6 +96,7 @@ const DeliveryPage = () => {
             <button
               type="submit"
               className="mt-4 bg-orange-500 py-2 px-4 rounded-md"
+              onClick={() => navigate("/payment")}
             >
               Use this address
             </button>
