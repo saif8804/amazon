@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const OrderSummary = () => {
+const OrderSummary = ({text, para}) => {
 
 const cartItems = useSelector((store) => store?.cart?.items);
 
@@ -13,11 +13,10 @@ const cartItems = useSelector((store) => store?.cart?.items);
     <div className=" w-[280px] h-[300px] border-2 border-gray-100 py-2 px-4 rounded-md ">
       <div>
         <span className="bg-orange-400 py-1 px-12 rounded cursor-pointer ">
-          Use this address
+          {text}
         </span>
         <p className="text-sm text-center pt-1 tracking-tighter">
-          Choose a shipping address and payment method to calculate shipping,
-          handling and tax.
+          {para}
         </p> 
         <hr className="h-[3px] mt-2 bg-gray-600" />
       </div>

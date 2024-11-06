@@ -10,7 +10,8 @@ const CheckOut = () => {
         <CheckoutHeader />
       <div className=" flex justify-around  mt-8">
         <DeliveryPage />
-        <OrderSummary />
+        <OrderSummary text="use this address" para="Choose a shipping address and payment method to calculate shipping,
+          handling and tax." />
       </div>
     </div>
   );
