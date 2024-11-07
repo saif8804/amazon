@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PaymentGateway = () => {
+const PaymentGateway = ({payment, setPayment}) => {
   const [isUpiOpen, setIsUpiOpen] = useState(false);
   const [isEmiOpen, setIsEmiOpen] = useState(false);
 
@@ -12,13 +12,17 @@ const PaymentGateway = () => {
     setIsEmiOpen(!isEmiOpen);
   };
 
+  const handlePayment = (e) =>{
+    setPayment(e.target.value)
+  } 
+
   return (
     <div className="w-[800px] border-2 border-gray-200  rounded-md h-[450px] mt-4 p-2">
       <div>
         <h2 className="text-xl font-bold">Another Payment method</h2>
         <div className="w-[780px] h-[1px] bg-gray-300"></div>
         <div className="flex gap-4 mt-3 ml-4">
-          <input type="radio" name="debit-card" />
+          <input type="radio" name="payment" value='Credit or debit Card' onChange={handlePayment} />
           <h3 className="font-bold">Credit or debit Card</h3>
         </div>
         <div className=" flex ml-20 gap-2 mt-2">
@@ -66,7 +70,7 @@ const PaymentGateway = () => {
       </div>
       <div className="mt-3 ml-4">
         <div className="flex gap-4">
-          <input type="radio" name="netbanking"/>
+          <input type="radio"  name="payment" value="Net banking" onChange={handlePayment}/>
           <h2 className="font-bold">Net banking</h2>
         </div>
         <div className="mt-4 ml-4">
@@ -89,7 +93,7 @@ const PaymentGateway = () => {
       </div>
       <div className="mt-3 ml-4">
         <div className="flex gap-4">
-          <input type="radio" name="api" onClick={handleUPI} />
+          <input type="radio" name="payment" value="other UPI Apps" onChange={handlePayment} onClick={handleUPI} />
           <h2 className="font-bold">other UPI Apps</h2>
         </div>
         {isUpiOpen && (
@@ -113,7 +117,7 @@ const PaymentGateway = () => {
       </div>
       <div className="mt-3 ml-4">
         <div className="flex gap-4">
-          <input type="radio" name="emi" onClick={handleEMI} />
+          <input type="radio" name="payment" value="EMI" onChange={handlePayment} onClick={handleEMI} />
           <h2 className="font-bold">EMI</h2>
         </div>
         {isEmiOpen && (
@@ -127,7 +131,7 @@ const PaymentGateway = () => {
       </div>
        <div className="mt-3 ml-4">
           <div className="flex gap-4">
-             <input type="radio" name="delivery" />
+             <input type="radio" name="payment"  value="Cash on Delivery/Pay on Delivery" onChange={handlePayment}/>
              <h2 className="font-bold">Cash on Delivery/Pay on Delivery</h2>
           </div>
        </div>

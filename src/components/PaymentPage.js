@@ -4,9 +4,10 @@ import OrderSummary from "./OrderSummary";
 import PaymentGateway from "./PaymentGateway";
 
 const PaymentPage = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(false)
   const [savedAddresses, setSavedAddresses] = useState([]);
+  const [payment, setPayment] = useState();
+;
   const loadAddresses = () => {
     const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
     setSavedAddresses(addresses);
@@ -51,7 +52,7 @@ const PaymentPage = () => {
             <h2 className="text-xl font-bold text-orange-800">
               2. Payment method
             </h2>
-            <p className="font-bold">Pay on delivery (cash / card)</p>
+            <p className="font-bold">{payment}</p>
             <button
               onClick={handlePayment}
               className="text-sky-500 hover:text-orange-800 hover:underline"
@@ -59,7 +60,7 @@ const PaymentPage = () => {
               {isOpen ? "close" : "change"}
             </button>
           </div>
-          <div>{isOpen && <PaymentGateway />}</div>
+          <div>{isOpen && <PaymentGateway payment={payment} setPayment={setPayment} />}</div>
           <div className="w-[780px] h-[1px] bg-gray-300 mt-4"></div>
           <div className="mt-2">
             <h2 className="text-xl font-bold"> 3. Offers</h2>
