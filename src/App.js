@@ -7,6 +7,7 @@ import appStore from "./utils/store";
 import Cart from "./components/Cart";
 import CheckOut from "./components/CheckOut";
 import PaymentPage from "./components/PaymentPage";
+import Order from "./components/Order";
 
 function App() {
   return (
@@ -19,8 +20,7 @@ function App() {
           <Route  path="/cart" element={<Cart/>}/>  
           <Route  path="/check-out" element={<CheckOut/>}/>  
           <Route  path="/payment" element={<PaymentPage/>}/>  
-
-          
+          <Route  path="/order" element={<Order/>}/>  
         </Routes>
       </Router>
     </div>
