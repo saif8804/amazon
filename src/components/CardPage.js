@@ -27,7 +27,7 @@ const CardPage = () => {
   }
   return (
     <div className="products flex gap-4 justify-center ml-28 mt-28">
-      <img src={product.image} alt="product" />
+      <img src={product.image} alt="product" className="w-48 h-48" />
       <div className="flex flex-col items-start">
         <p className="w-2/4 text-xl font-bold">{product.description}</p>
         <Stars stars={product.stars} />

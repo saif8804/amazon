@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import CheckoutHeader from "./CheckoutHeader";
-import OrderSummary from "./OrderSummary";
+import PaymentSummary from "./PaymentSummary";
 import PaymentGateway from "./PaymentGateway";
+import { useSelector } from "react-redux";
 
 const PaymentPage = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [payment, setPayment] = useState();
-;
+  const cartItems = useSelector((store) => store?.cart?.items);
+
   const loadAddresses = () => {
     const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
     setSavedAddresses(addresses);
@@ -60,7 +62,11 @@ const PaymentPage = () => {
               {isOpen ? "close" : "change"}
             </button>
           </div>
-          <div>{isOpen && <PaymentGateway payment={payment} setPayment={setPayment} />}</div>
+          <div>
+            {isOpen && (
+              <PaymentGateway payment={payment} setPayment={setPayment} />
+            )}
+          </div>
           <div className="w-[780px] h-[1px] bg-gray-300 mt-4"></div>
           <div className="mt-2">
             <h2 className="text-xl font-bold"> 3. Offers</h2>
@@ -72,24 +78,29 @@ const PaymentPage = () => {
               <div className="mr-20">
                 <h4 className="font-bold">delivery date 16 Nov 2024.</h4>
                 <div className="flex gap-2 mt-2">
-                  <img
-                    src="../assets/laptop-stand.jpg"
-                    alt="stand"
-                    className="w-[60px] h-[40px]"
-                  />
-                  <p className="w-52">  
-                    proffisy Laptop Stand for Desk Sitting/Standing Laptop Riser
-                    with 360 Degree Rotation Height Adjustable up to 18.9-inch
-                    Ergonomic Aluminum Laptop Stand for 11-17.3 inch Laptop
-                    Office Home,Grey
-                  </p>
+                  {cartItems.map((items) => {
+                    return (
+                      <>
+                        <img
+                          src={items.image}
+                          alt="stand"
+                          className="w-[60px] h-[40px]"
+                        />
+                         <p className="w-52">{items.description}</p>
+                      </>
+                    );
+                  })}
+                 
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <OrderSummary text="place your order" para="By placing your order, you agree to Amazon's privacy notice and conditions of use."/>
+          <PaymentSummary
+            text="place your order"
+            para="By placing your order, you agree to Amazon's privacy notice and conditions of use."
+          />
         </div>
       </div>
     </div>

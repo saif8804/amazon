@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const OrderSummary = ({text, para}) => {
+const PaymentSummary = ({text, para}) => {
    const navigate = useNavigate();
 
 const cartItems = useSelector((store) => store?.cart?.items);
@@ -15,9 +15,9 @@ const cartItems = useSelector((store) => store?.cart?.items);
     <div className=" w-[280px] h-[300px] border-2 border-gray-100 py-2 px-4 rounded-md ">
       <div>
         <span className="bg-orange-400 py-1 px-12 rounded cursor-pointer" 
-          onClick={() =>{
-             navigate("/payment")
-          }}
+           onClick={() =>{
+              navigate("/order")
+           }}
          >
           {text}
         </span>
@@ -45,4 +45,4 @@ const cartItems = useSelector((store) => store?.cart?.items);
   );
 };
 
-export default OrderSummary;
+export default PaymentSummary;
